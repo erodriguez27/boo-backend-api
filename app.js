@@ -1,4 +1,6 @@
 'use strict';
+const dotenv = require('dotenv');
+dotenv.config();
 
 const express = require('express');
 const app = express();
@@ -13,3 +15,7 @@ app.use('/', require('./routes/profile')());
 // start server
 const server = app.listen(port);
 console.log('Express started. Listening on %s', port);
+
+module.exports = {
+    server, app
+}

@@ -22,6 +22,7 @@ const profiles = [
 module.exports = function() {
 
   router.get('/*', function(req, res, next) {
+    console.log('asd')
     res.render('profile_template', {
       profile: profiles[0],
     });
@@ -29,4 +30,3 @@ module.exports = function() {
 
   return router;
 }
-
