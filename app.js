@@ -9,7 +9,7 @@ const { mongoConnect } = require("./clients/mongoose");
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
+app.use(express.json({ limit: '50mb' }));
 // routes
 app.use('/', require('./routes/profile')());
 
