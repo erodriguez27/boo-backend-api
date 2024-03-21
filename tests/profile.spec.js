@@ -9,6 +9,9 @@ describe("API / - conversations", () => {
     expect(req.type).toBe("text/html");
     expect(req.text).toBeDefined();
   });
+  it("Should return 400 status due to no having name in request", async () => {
+    const req = await request(app).post("/").send({...newUser, name: undefined}).expect(400);
+  });
   it("Should create an user profile", async () => {
     const req = await request(app).post("/").send({...newUser}).expect(200);
     expect(req.type).toBe("text/html");
@@ -16,4 +19,15 @@ describe("API / - conversations", () => {
     expect(req.text.includes('Kawasaki')).toBe(true);
     expect(req.text.includes(newUser.description)).toBe(true);
   });
+  it("Should get 404 when searching by incorrect userId", async () => {
+    const mockedUserId = "500";
+    await request(app).get(`/${mockedUserId}`).expect(404);
+  });
+  it("Should get user profile for previous create user", async () => {
+    const req = await request(app).get(`/0`).expect(200);
+    expect(req.type).toBe("text/html");
+    expect(req.text).toBeDefined();
+    expect(req.text.includes('Kawasaki')).toBe(true);
+    expect(req.text.includes(newUser.description)).toBe(true);
+  })
 });

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment');
+
 const { Schema } = mongoose
-  
+
+autoIncrement.initialize(mongoose.connection);
+
 const userSchema = new Schema(
   {
     id: Number,
@@ -33,9 +37,10 @@ userSchema.statics.createUser = function (userData) {
 userSchema.statics.findUserById = function(userId) {
     if(!userId) throw new Error('No userId provided');
     
-    return this.findById(userId);
+    return this.findOne({id: userId});
 }
 
 /** @class userAccount */
+userSchema.plugin(autoIncrement.plugin, { model: 'userAccount', field: 'id' });
 const userAccount = mongoose.model('userAccount', userSchema);
 module.exports = userAccount;
