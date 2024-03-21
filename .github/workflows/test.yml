@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 16
+      - name: Use Node.js 18.16.1
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install  # Install dependencies
+      - run: npm install --force # Install dependencies
       - run: npm test     # Run your tests
