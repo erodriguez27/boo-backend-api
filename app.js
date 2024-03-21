@@ -11,6 +11,7 @@ const { mongoConnect } = require("./clients/mongoose");
 app.set('view engine', 'ejs');
 app.use(express.json({ limit: '50mb' }));
 // routes
+app.use('/comments', require('./routes/comments')());
 app.use('/', require('./routes/profile')());
 
 // start server
