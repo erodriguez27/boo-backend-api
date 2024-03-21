@@ -36,7 +36,7 @@ const getCommentsForUser = async (req, res) => {
     const {userId} = req.params
     const queryParams = req.query;
     let comments;
-    console.log(`putaaaa ${userId}`)
+
     if(!userId){
         return res.sendStatus(400);
     }
@@ -44,7 +44,7 @@ const getCommentsForUser = async (req, res) => {
     try{
         comments = await commentsModel.getComments(queryParams.filter, queryParams.sort, userId);
     } catch (err) {
-        console.error(`puta Error getting comments ${err}`);
+        console.error(`Error getting comments ${err}`);
         return res.sendStatus(500);
     }
     
