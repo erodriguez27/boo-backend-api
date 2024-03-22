@@ -126,6 +126,13 @@ commentSchema.statics.getComments = async function (filter, sort, userId) {
   return await this.find(query).sort(sorting);
 };
 
+commentSchema.statics.likeAComment = async function (commentId) {
+  if(!commentId) throw new Error(`error liking comment, commentId wasn't provided`);
+  
+  const objectId = new mongoose.Types.ObjectId(commentId);
+  return this.findOneAndUpdate({_id : objectId}, {$inc : {likes : 1}}, { new: true });
+}
+
 /** @class comment */
 const comment = mongoose.model("comments", commentSchema);
 module.exports = comment;

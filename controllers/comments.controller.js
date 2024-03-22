@@ -53,8 +53,24 @@ const getCommentsForUser = async (req, res) => {
     return res.status(200).json({results: comments});
 }
 
+const likeComment = async (req, res) => {
+    const {commentId} = req.params;
+    let comment;
+    try{
+        comment = await commentsModel.likeAComment(commentId);
+    } catch (err){
+        console.error(`error liking comment ${err}`);
+        return res.sendStatus(400);
+    }
+    
+    if(!comment) return res.sendStatus(404);
+    
+    return res.status(200).json({comment});
+}
+
 module.exports = {
     addComment,
     getComments,
     getCommentsForUser,
+    likeComment,
 }

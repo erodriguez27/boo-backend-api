@@ -4,6 +4,7 @@ const { describe, it, afterAll } = require("@jest/globals");
 const { app } = require("../app");
 const { stopDatabaseServer } = require("../clients/database");
 const mockedCelebrity = require("./mocks/mockedCelebrity.mock.json");
+let commentId;
 
 describe("comments", () => {
   afterAll(() => {
@@ -34,6 +35,7 @@ describe("comments", () => {
     expect(comment).toBeDefined();
     expect(comment.title).toBe(newComment.title);
     expect(comment.commentedUser).toBe(newComment.commentedUser);
+    commentId = comment._id;
   });
   it("Should get all comments created", async () => {
     const req = await request(app)

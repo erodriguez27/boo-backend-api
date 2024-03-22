@@ -9,6 +9,10 @@ module.exports = function () {
     commentsController.getComments(req, res);
   });
   
+  router.post("/:commentId/like", (req, res) => {
+    commentsController.likeComment(req, res);
+  });
+
   router.get("/:userId", (req, res) => {
     commentsController.getCommentsForUser(req, res);
   });
@@ -16,6 +20,7 @@ module.exports = function () {
   router.post("/", (req, res) => {
     commentsController.addComment(req, res);
   });
+  
 
   return router;
 };
