@@ -1,9 +1,16 @@
+const mongoose = require('mongoose');
 const request = require("supertest");
 const { describe, it, afterAll } = require("@jest/globals");
 const { app } = require("../app");
+const { stopDatabaseServer } = require("../clients/database");
 const newUser = require("./mocks/mockedUser.mock.json");
 
 describe("API / - conversations", () => {
+  afterAll(() => {
+		mongoose.disconnect();
+		stopDatabaseServer();
+	});
+
   it("Should get mocked profile", async () => {
     const req = await request.agent(app).get("/").expect(200);
     expect(req.type).toBe("text/html");
