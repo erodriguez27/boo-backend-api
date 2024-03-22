@@ -16,7 +16,6 @@
     "express": "^4.17.1",
     "mongodb-memory-server": "^9.1.7",
     "mongoose": "^8.2.3",
-    "mongoose-auto-increment": "^5.0.1",
     "nodemon": "^3.1.0"
   },
   "devDependencies": {
