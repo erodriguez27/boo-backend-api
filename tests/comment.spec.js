@@ -5,7 +5,7 @@ const mockedCelebrity = require("./mocks/mockedCelebrity.mock.json");
 
 describe("API / - conversations", () => {
   it("Should get 404 getting comments related to userId without comments", async () => {
-    const req = await request(app).get("/comments/600").expect(404);
+    const req = await request.agent(app).get("/comments/600").expect(404);
   });
   it("Should add new comment about mockedCelebrity profile", async () => {
     const newComment = {
@@ -17,7 +17,7 @@ describe("API / - conversations", () => {
       enneagram: "2w3",
       zodiac: "Leo",
     };
-    const req = await request(app)
+    const req = await request.agent(app)
       .post("/comments")
       .send({ ...newComment })
       .expect(200);
@@ -29,7 +29,7 @@ describe("API / - conversations", () => {
     expect(comment.commentedUser).toBe(newComment.commentedUser);
   });
   it("Should get all comments created", async () => {
-    const req = await request(app)
+    const req = await request.agent(app)
       .get(`/comments/${mockedCelebrity.id}`)
       .expect(200);
     const {
@@ -39,7 +39,7 @@ describe("API / - conversations", () => {
     expect(results.length).toBeGreaterThan(0);
   });
   it("Should get comments related to the celebrity", async () => {
-    const req = await request(app)
+    const req = await request.agent(app)
       .get(`/comments/${mockedCelebrity.id}`)
       .expect(200);
     const {
