@@ -3,8 +3,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const express = require('express');
+const http = require('http');
 const app = express();
-const port =  process.env.PORT || 3000;
 const { mongoConnect } = require("./clients/mongoose");
 
 // set the view engine to ejs
@@ -14,10 +14,8 @@ app.use(express.json({ limit: '50mb' }));
 app.use('/comments', require('./routes/comments')());
 app.use('/', require('./routes/profile')());
 
-// start server
 mongoConnect();
-const server = app.listen(port);
-console.log('Express started. Listening on %s', port);
+const server = new http.Server(app);
 
 module.exports = {
     server, app

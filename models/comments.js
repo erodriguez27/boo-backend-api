@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 
 const { Schema } = mongoose;
-
-autoIncrement.initialize(mongoose.connection);
 
 const mbtiOptions = [
   "INFP",
